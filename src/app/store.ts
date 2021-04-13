@@ -1,5 +1,4 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
 import filterSlice from '../features/filters/FilterSlice';
 import incidentsReducer from '../features/incidents/IncidentsSlice';
 import incidentReducer from '../features/incident/IncidentSlice';
@@ -7,7 +6,6 @@ import paginationSlice from '../features/pagination/PaginationSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
     incidents: incidentsReducer,
     incident: incidentReducer,
     pagination: paginationSlice,

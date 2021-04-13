@@ -11,35 +11,52 @@ import {
 import { Incident } from './features/incident';
 import { ScrollTop } from './utils';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-
-const Home = () => {
-  return (
-    <>
-      <Typography component='div'>
-        <Box
-          letterSpacing={3}
-          m={3}
-          textAlign='center'
-          fontWeight='fontWeightMedium'
-          fontSize='h4.fontSize'
-          fontFamily='Monospace'>
-          Police department of Berlin
-        </Box>
-      </Typography>
-      <Filter />
-      <Incidents />
-
-      <Pagination />
-      <ScrollTop>
-        <Fab color='secondary' size='small' aria-label='scroll back to top'>
-          <KeyboardArrowUpIcon />
-        </Fab>
-      </ScrollTop>
-    </>
-  );
-};
+import Link from '@material-ui/core/Link';
 
 function App() {
+  const preventDefault = (event: React.SyntheticEvent) =>
+    event.preventDefault();
+
+  const Home = () => {
+    return (
+      <>
+        <Typography component='div'>
+          <Box
+            letterSpacing={3}
+            m={3}
+            textAlign='center'
+            fontWeight='fontWeightMedium'
+            fontSize='h4.fontSize'
+            fontFamily='Monospace'>
+            Police department of Berlin
+          </Box>
+        </Typography>
+        <Filter />
+        <Incidents />
+        <Pagination />
+        <ScrollTop>
+          <Fab color='secondary' size='small' aria-label='scroll back to top'>
+            <KeyboardArrowUpIcon />
+          </Fab>
+        </ScrollTop>
+        <Box
+          style={{
+            marginTop: 132,
+            marginBottom: 30,
+            display: 'grid',
+            placeItems: 'center',
+          }}>
+          <Typography>
+            Handicraft by
+            <Link href='https://github.com/sanjmgr' onClick={preventDefault}>
+              {' '}
+              sanjmgr
+            </Link>
+          </Typography>
+        </Box>
+      </>
+    );
+  };
   return (
     <Router>
       <Container>

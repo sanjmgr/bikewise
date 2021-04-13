@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     media: {
       borderRadius: theme.spacing(1),
-      paddingBottom: 120,
       marginTop: 20,
       marginBottom: 30,
     },
@@ -52,7 +51,6 @@ const Details = ({ incident }: { incident: Incident }) => {
     <Container
       style={{
         width: _width,
-        paddingTop: 40,
       }}>
       <Button
         variant='text'
