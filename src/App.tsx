@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Fab, Toolbar, Typography } from '@material-ui/core';
+import { Box, Container, Fab, Typography } from '@material-ui/core';
 import './App.css';
 import { Filter, Incidents, Pagination } from './features';
 import {

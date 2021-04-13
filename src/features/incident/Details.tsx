@@ -3,27 +3,17 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import useWindowSize from '../../app/useWindowSize';
 import { useHistory } from 'react-router-dom';
 
-import { Box, Button, Container, Typography } from '@material-ui/core';
+import { Box, Button, Container, Theme, Typography } from '@material-ui/core';
 import { Formatter, Incident } from '../../utils';
 import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    container: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      alignItems: 'center',
-      flexWrap: 'wrap',
-      backgroundColor: 'lightblue',
-      rowGap: 30,
-      marginTop: 40,
-    },
-    box: { textAlign: 'center' },
-    img: {
-      width: ' 400px',
-      height: '200px',
-      objectFit: 'cover',
+    media: {
+      borderRadius: theme.spacing(1),
+      paddingBottom: 120,
+      marginTop: 20,
+      marginBottom: 30,
     },
     title: {
       paddingTop: 12,
@@ -48,13 +38,19 @@ const Details = ({ incident }: { incident: Incident }) => {
   const _height = height === undefined ? 450 : (height * 2.5) / 3;
   const _width = width === undefined ? 345 : (width * 2) / 3;
   const default_image_url = 'https://bit.ly/2RkCWAl';
-  console.log(incident.location_description);
   let history = useHistory();
-
+  const {
+    media,
+    title,
+    description,
+    occurred_at,
+    updated_at,
+    location_description,
+    location_type,
+  } = incident;
   return (
     <Container
       style={{
-        height: _height,
         width: _width,
         paddingTop: 40,
       }}>
@@ -64,23 +60,32 @@ const Details = ({ incident }: { incident: Incident }) => {
         onClick={() => history.push('/')}>
         Back
       </Button>
+      <Box className={classes.media} overflow='hidden' height={_height * 0.61}>
+        <img
+          src={media?.image_url || default_image_url}
+          alt={title}
+          style={{ width: _width }}
+        />
+      </Box>
       <Box className={classes.title}>
-        <Typography variant='h5'>{incident.title}</Typography>
+        <Typography variant='h5'>{title}</Typography>
       </Box>
       <Box className={classes.description}>
-        <Typography>{incident.description}</Typography>
+        <Typography>
+          {description || 'Description is not available...'}
+        </Typography>
       </Box>
       <Box className={classes.datetime}>
         <Typography variant='caption' color='secondary' component='p'>
-          Missing: {Formatter(incident.occurred_at)}
+          Missing: {Formatter(occurred_at)}
         </Typography>
         <Typography variant='caption' color='primary' component='p'>
-          Reported: {Formatter(incident.updated_at)}
+          Reported: {Formatter(updated_at)}
         </Typography>
       </Box>
       <Box className={classes.location}>
-        {incident.location_description ? (
-          <Typography>Location: {incident?.location_type}</Typography>
+        {location_description ? (
+          <Typography>Location: {location_type}</Typography>
         ) : (
           ''
         )}

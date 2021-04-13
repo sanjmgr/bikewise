@@ -37,13 +37,21 @@ const useStyles = makeStyles(() =>
 const IncidentCard: React.FC<{ incident: Incident }> = ({ incident }) => {
   const classes = useStyles();
   const default_image_url = 'https://bit.ly/2RkCWAl';
+  const {
+    media,
+    title,
+    description,
+    occurred_at,
+    updated_at,
+    address,
+  } = incident;
   return (
     <Paper elevation={1} variant='outlined'>
       <Card className={classes.root}>
         <CardMedia
           className={classes.media}
-          image={incident.media.image_url || default_image_url}
-          title={incident.title}
+          image={media?.image_url || default_image_url}
+          title={title}
         />
         <CardContent>
           <Typography
@@ -51,18 +59,20 @@ const IncidentCard: React.FC<{ incident: Incident }> = ({ incident }) => {
             color='textPrimary'
             component='h4'
             className={classes.title}>
-            <Link to={`/${incident.id}`}>{incident.title}</Link>
+            <Link to={`/${incident.id}`}>{title ? title : 'Untitled'}</Link>
           </Typography>
           <Typography variant='body2' color='textSecondary' component='p'>
-            {incident.description?.slice(0, 200).concat('...')}
+            {description
+              ? description?.slice(0, 200).concat('...')
+              : 'Description is not available...'}
           </Typography>
         </CardContent>
         <div className={classes.caption}>
           <Typography variant='caption' color='secondary' component='p'>
-            Stolen: {Formatter(incident.occurred_at)}
+            Stolen: {Formatter(occurred_at)}
           </Typography>
           <Typography variant='caption' color='primary' component='p'>
-            Reported: {Formatter(incident.updated_at)}
+            Reported: {Formatter(updated_at)}
           </Typography>
         </div>
         <Typography
@@ -70,7 +80,7 @@ const IncidentCard: React.FC<{ incident: Incident }> = ({ incident }) => {
           color='textPrimary'
           component='p'
           className={classes.address}>
-          {incident.address}
+          {address}
         </Typography>
       </Card>
     </Paper>
