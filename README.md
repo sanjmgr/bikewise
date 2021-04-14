@@ -56,7 +56,7 @@ Host the website on the service of your choice (zeit, Heroku, AWS, GCloud, ...)
 
 ## Tech Requirements
 
-- [](https://reactjs.org/)
+- [Reactjs](https://reactjs.org/)
 - [React Router](https://reactrouter.com/web/guides/quick-start)
 - [Typescript](https://www.typescriptlang.org/)
 - [Material UI](https://material-ui.com/)
